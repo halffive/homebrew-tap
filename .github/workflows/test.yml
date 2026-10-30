@@ -1,0 +1,32 @@
+name: test
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions: {}
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  chronos-cli:
+    runs-on: macos-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - run: mkdir -p "$(brew --repository)/Library/Taps/halffive"
+      - run: ln -s "$GITHUB_WORKSPACE" "$(brew --repository)/Library/Taps/halffive/homebrew-tap"
+      - run: brew trust --formula halffive/tap/chronos-cli
+      - run: brew style halffive/tap
+      - run: brew install --build-from-source halffive/tap/chronos-cli
+      - run: brew test halffive/tap/chronos-cli
+      - run: test -f "$(brew --prefix)/share/zsh/site-functions/_chronos"
