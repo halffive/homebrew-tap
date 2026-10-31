@@ -2,8 +2,8 @@ class ChronosCli < Formula
   desc "Manage Chronos schedules, jobs and executions from the terminal"
   homepage "https://chronos.sh"
   # The chronos-cli release workflow rewrites url and sha256 for every stable release.
-  url "https://github.com/halffive/chronos-cli/archive/refs/tags/v0.0.0.tar.gz"
-  sha256 "0000000000000000000000000000000000000000000000000000000000000000"
+  url "https://github.com/halffive/chronos-cli/archive/refs/tags/v0.1.0-rc.1.tar.gz"
+  sha256 "f4dcaa5181cf53846688bad0165ca5ad4e67f9053cf5743337ef9ce5847e57f4"
   license "MIT"
   head "https://github.com/halffive/chronos-cli.git", branch: "main"
 
